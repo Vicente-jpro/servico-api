@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.loja2023.exceptions.CidadeNotFoundException;
 import com.example.loja2023.models.Cidade;
 import com.example.loja2023.models.Provincia;
 import com.example.loja2023.repositories.CidadeRepository;
@@ -25,6 +26,12 @@ public class CidadeService {
 
         return cidadeRepository.findAllByProvincia(prov);
 
+    }
+
+    public Cidade getCidadeById(Long idCidade) {
+        log.info("Buscar cidade pelo ID: {}", idCidade);
+        return cidadeRepository.findById(idCidade)
+                .orElseThrow(() -> new CidadeNotFoundException("Cidade não encontrada ID: " + idCidade));
     }
 
 }
