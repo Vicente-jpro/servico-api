@@ -2,6 +2,7 @@ package com.example.loja2023.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ import com.example.loja2023.services.EnderecoService;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -51,7 +53,8 @@ public class EnderecoController {
 
     @GetMapping("/{id}")
     @ResponseBody
-    @ApiOperation("Buscar endereço apartir do ID")
+    @ApiOperation("Buscar endereço pelo ID.")
+    @ApiResponse(code = 200, message = "Busca realizada com sucesso.")
     public ResponseEntity<EnderecoDto> getEnderecoById(@PathVariable("id") Long idEndereco) {
         log.info("Buscando o endereço pelo ID: {}", idEndereco);
         String a = "DDD";
@@ -64,5 +67,12 @@ public class EnderecoController {
                 .cidade(cidadeBuilder.toCidadeDto(endereco.getCidade()))
                 .build();
         return ResponseEntity.ok(enderecoDto);
+    }
+
+    @DeleteMapping("/{id}")
+    @ApiOperation("Eliminar endereço pelo ID.")
+    @ApiResponse(code = 200, message = "Eliminar endereco pelo ID: ")
+    public void eliminar(@PathVariable("id") Long idEnderenco) {
+        enderecoService.eliminarPeloId(idEnderenco);
     }
 }

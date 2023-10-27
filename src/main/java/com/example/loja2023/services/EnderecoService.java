@@ -32,16 +32,21 @@ public class EnderecoService {
                 .build();
 
         endereco = enderecoRepository.save(endereco);
-        log.info("Endereco salvo com sucesso");
+        log.info("Fim da operação salvar endereço.");
 
         return endereco;
     }
 
     public Endereco getEnderecoById(Long idEndereco) {
         log.info("Buscar endereço com ID: {}", idEndereco);
-        String a = "";
+
         return enderecoRepository.findById(idEndereco)
                 .orElseThrow(() -> new EnderecoNotFoundException("Endereço não encontrado ID: " + idEndereco));
+    }
+
+    public void eliminarPeloId(Long idEnderenco) {
+        log.info("Eliminar endereço...");
+        enderecoRepository.deleteById(idEnderenco);
     }
 
 }
