@@ -18,14 +18,13 @@ import lombok.extern.slf4j.Slf4j;
 public class CidadeService {
 
     private final CidadeRepository cidadeRepository;
-    private final ProvinciaService provinciaService;
 
-    public List<Cidade> getCidadesByProvincia(Provincia provincia) {
-        log.info("Buscar cidades pela provincia id_provincia: {}", provincia.getId());
-        Provincia prov = provinciaService.getProvinciaById(provincia.getId());
+    public List<Cidade> getCidadesByIdProvincia(Long idProvincia) {
+        log.info("Buscar cidades pela provincia id_provincia: {}", idProvincia);
+        Provincia provincia = new Provincia();
+        provincia.setId(idProvincia);
 
-        return cidadeRepository.findAllByProvincia(prov);
-
+        return cidadeRepository.findAllByProvincia(provincia);
     }
 
     public Cidade getCidadeById(Long idCidade) {

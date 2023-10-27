@@ -75,4 +75,5 @@ public class EnderecoController {
     public void eliminar(@PathVariable("id") Long idEnderenco) {
         enderecoService.eliminarPeloId(idEnderenco);
     }
+
 }
