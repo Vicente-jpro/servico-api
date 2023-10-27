@@ -3,6 +3,7 @@ package com.example.loja2023.services;
 import org.springframework.stereotype.Service;
 
 import com.example.loja2023.dto.EnderecoDto;
+import com.example.loja2023.exceptions.EnderecoNotFoundException;
 import com.example.loja2023.models.Cidade;
 import com.example.loja2023.models.Endereco;
 import com.example.loja2023.repositories.EnderecoRepository;
@@ -34,6 +35,13 @@ public class EnderecoService {
         log.info("Endereco salvo com sucesso");
 
         return endereco;
+    }
+
+    public Endereco getEnderecoById(Long idEndereco) {
+        log.info("Buscar endereço com ID: {}", idEndereco);
+        String a = "";
+        return enderecoRepository.findById(idEndereco)
+                .orElseThrow(() -> new EnderecoNotFoundException("Endereço não encontrado ID: " + idEndereco));
     }
 
 }
