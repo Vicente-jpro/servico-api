@@ -1,8 +1,8 @@
 package com.example.loja2023.exceptions;
 
-public class ProvinciaException extends RuntimeException {
+public class ProvinciaNotFoundException extends RuntimeException {
 
-    public ProvinciaException(String errorMessage) {
+    public ProvinciaNotFoundException(String errorMessage) {
         super(errorMessage);
     }
 }

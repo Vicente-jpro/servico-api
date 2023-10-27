@@ -20,5 +20,5 @@ public class CidadeDto {
     private Long id;
     private String nomeCidade;
     private ProvinciaDto provincia;
-    private List<EnderecoDto> enderecos;
+    // private List<EnderecoDto> enderecos;
 }

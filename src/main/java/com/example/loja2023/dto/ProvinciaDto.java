@@ -19,5 +19,5 @@ public class ProvinciaDto {
 
     private Long id;
     private String nomeProvincia;
-    private List<CidadeDto> cidades;
+    // private List<CidadeDto> cidades;
 }

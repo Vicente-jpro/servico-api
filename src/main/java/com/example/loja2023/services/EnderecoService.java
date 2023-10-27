@@ -20,6 +20,7 @@ public class EnderecoService {
 
     public Endereco salvar(EnderecoDto enderecoDto) {
         log.info("Salvar endereço...");
+
         Long idCidade = enderecoDto.getCidade().getId();
 
         Cidade cidade = cidadeService.getCidadeById(idCidade);

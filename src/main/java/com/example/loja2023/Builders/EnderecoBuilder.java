@@ -2,7 +2,6 @@ package com.example.loja2023.Builders;
 
 import org.springframework.stereotype.Component;
 
-import com.example.loja2023.dto.CidadeDto;
 import com.example.loja2023.dto.EnderecoDto;
 import com.example.loja2023.models.Endereco;
 

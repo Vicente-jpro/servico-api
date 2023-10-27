@@ -44,16 +44,17 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     }
 
     // Permite acesso nas aplicações front end
+    // Basic auth
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients
                 .inMemory()
-                .withClient("my-angular-app")
-                .secret("12345")
+                .withClient("loja2023-app")
+                .secret("@12345@")
                 // Permitir o front end ler e escrever na minha api
                 .scopes("read", "write")
                 .authorizedGrantTypes("password")
                 // Duração do token 1h e 30min
-                .accessTokenValiditySeconds(1800);
+                .accessTokenValiditySeconds(19800);
     }
 }
