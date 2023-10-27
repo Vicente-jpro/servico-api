@@ -10,4 +10,5 @@ public class EnderecoDto {
     private Long id;
     private String descricao;
     private CidadeDto cidade;
+
 }

@@ -7,7 +7,6 @@ import com.example.loja2023.models.Provincia;
 import com.example.loja2023.repositories.ProvinciaRepository;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

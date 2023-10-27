@@ -9,8 +9,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Builder;
 import lombok.Data;
 
+@Builder
 @Data
 @Entity
 @Table(name = "enderecos")
