@@ -22,10 +22,10 @@ public class CidadeController {
 
     private final CidadeService cidadeService;
 
-    @GetMapping("/{id_provincia}")
+    @GetMapping("/{id_provincia}/provincia")
     @ApiOperation("Listar cidades pelo id_provincia.")
     @ApiResponse(code = 200, message = "Cidade listada com sucesso.")
-    public ResponseEntity<List<Cidade>> getCidadesByIdProvincia(@PathVariable("id") Long idprovincia) {
+    public ResponseEntity<List<Cidade>> getCidadesByIdProvincia(@PathVariable("id_provincia") Long idprovincia) {
         return ResponseEntity.ok(cidadeService.getCidadesByIdProvincia(idprovincia));
     }
 

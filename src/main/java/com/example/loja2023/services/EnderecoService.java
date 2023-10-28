@@ -44,9 +44,18 @@ public class EnderecoService {
                 .orElseThrow(() -> new EnderecoNotFoundException("Endereço não encontrado ID: " + idEndereco));
     }
 
-    public void eliminarPeloId(Long idEnderenco) {
-        log.info("Eliminar endereço...");
-        enderecoRepository.deleteById(idEnderenco);
+    public Endereco atualizar(EnderecoDto enderecoDto, Long idEndereco) {
+        log.info("Atualizar endereço...");
+
+        Endereco endereco = getEnderecoById(idEndereco);
+
+        if (endereco == null) {
+            log.info("Endereco não encontrado");
+            throw new EnderecoNotFoundException("Endereço não encrontrado");
+        }
+
+        enderecoDto.setId(idEndereco);
+        return salvar(enderecoDto);
     }
 
 }

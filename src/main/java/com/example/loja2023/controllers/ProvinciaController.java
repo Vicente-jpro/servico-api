@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("/paises")
+@RequestMapping("/provincias")
 @RequiredArgsConstructor
 public class ProvinciaController {
     private final ProvinciaService provinciaService;
@@ -33,7 +33,7 @@ public class ProvinciaController {
         return ResponseEntity.ok(provinciaService.getProvinciaById(idProvincia));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping
     @ApiOperation("Buscar todas as provincia.")
     @ApiResponse(code = 200, message = "Provincias buscada com sucesso.")
     public ResponseEntity<List<Provincia>> getListaProvincias() {

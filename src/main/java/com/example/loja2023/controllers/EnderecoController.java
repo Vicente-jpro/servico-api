@@ -4,11 +4,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +21,6 @@ import com.example.loja2023.services.EnderecoService;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -52,12 +51,10 @@ public class EnderecoController {
     }
 
     @GetMapping("/{id}")
-    @ResponseBody
     @ApiOperation("Buscar endereço pelo ID.")
     @ApiResponse(code = 200, message = "Busca realizada com sucesso.")
     public ResponseEntity<EnderecoDto> getEnderecoById(@PathVariable("id") Long idEndereco) {
         log.info("Buscando o endereço pelo ID: {}", idEndereco);
-        String a = "DDD";
         Endereco endereco = enderecoService.getEnderecoById(idEndereco);
 
         EnderecoDto enderecoDto = EnderecoDto
@@ -69,11 +66,22 @@ public class EnderecoController {
         return ResponseEntity.ok(enderecoDto);
     }
 
-    @DeleteMapping("/{id}")
-    @ApiOperation("Eliminar endereço pelo ID.")
-    @ApiResponse(code = 200, message = "Eliminar endereco pelo ID: ")
-    public void eliminar(@PathVariable("id") Long idEnderenco) {
-        enderecoService.eliminarPeloId(idEnderenco);
+    @PatchMapping("/{id}")
+    @ApiOperation("Atualizar endereço pelo ID.")
+    @ApiResponse(code = 200, message = "Atualizar endereco pelo ID: ")
+    public ResponseEntity<EnderecoDto> atualizar(@RequestBody EnderecoDto enderecoDto,
+            @PathVariable("id") Long idEnderenco) {
+
+        Endereco endereco = enderecoService.atualizar(enderecoDto, idEnderenco);
+
+        enderecoDto = EnderecoDto
+                .builder()
+                .id(endereco.getId())
+                .descricao(endereco.getDescricao())
+                .cidade(cidadeBuilder.toCidadeDto(endereco.getCidade()))
+                .build();
+        return ResponseEntity.ok(enderecoDto);
+
     }
 
 }

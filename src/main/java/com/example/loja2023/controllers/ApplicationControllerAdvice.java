@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.loja2023.exceptions.CidadeNotFoundException;
+import com.example.loja2023.exceptions.EnderecoNotFoundException;
 import com.example.loja2023.exceptions.ProvinciaNotFoundException;
 import com.example.loja2023.exceptions.UsuarioCadastradoException;
 import com.example.loja2023.exceptions.UsuarioNotFoundException;
@@ -44,7 +45,16 @@ public class ApplicationControllerAdvice {
 	@ExceptionHandler(CidadeNotFoundException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public ApiErrors cidadeNotFoundExceptionHandle(
-			UsuarioNotFoundException ex) {
+			CidadeNotFoundException ex) {
+		this.mensagemErro = ex.getMessage();
+		return new ApiErrors(mensagemErro);
+	}
+
+	@ResponseBody
+	@ExceptionHandler(EnderecoNotFoundException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public ApiErrors enderecoNotFoundExceptionHandle(
+			EnderecoNotFoundException ex) {
 		this.mensagemErro = ex.getMessage();
 		return new ApiErrors(mensagemErro);
 	}
@@ -53,7 +63,7 @@ public class ApplicationControllerAdvice {
 	@ExceptionHandler(ProvinciaNotFoundException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public ApiErrors provinciaNotFoundExceptionHandle(
-			UsuarioNotFoundException ex) {
+			ProvinciaNotFoundException ex) {
 		this.mensagemErro = ex.getMessage();
 		return new ApiErrors(mensagemErro);
 	}

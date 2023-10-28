@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -26,6 +28,7 @@ public class Provincia {
     private String nomeProvincia;
 
     @OneToMany(mappedBy = "provincia")
+    @JsonIgnore
     private List<Cidade> cidades;
 
 }
