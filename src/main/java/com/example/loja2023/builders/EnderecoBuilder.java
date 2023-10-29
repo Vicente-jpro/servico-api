@@ -1,4 +1,4 @@
-package com.example.loja2023.Builders;
+package com.example.loja2023.builders;
 
 import org.springframework.stereotype.Component;
 

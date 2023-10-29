@@ -17,6 +17,7 @@ import com.example.loja2023.exceptions.EnderecoNotFoundException;
 import com.example.loja2023.exceptions.ProvinciaNotFoundException;
 import com.example.loja2023.exceptions.UsuarioCadastradoException;
 import com.example.loja2023.exceptions.UsuarioNotFoundException;
+import com.example.loja2023.exceptions.UsuarioPerfilNotFoundException;
 import com.example.loja2023.utils.ApiErrors;
 
 @RestControllerAdvice
@@ -28,6 +29,14 @@ public class ApplicationControllerAdvice {
 	@ExceptionHandler(UsuarioCadastradoException.class)
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public ApiErrors usuarioCadastradoExceptionHandle(UsuarioCadastradoException ex) {
+		this.mensagemErro = ex.getMessage();
+		return new ApiErrors(mensagemErro);
+	}
+
+	@ResponseBody
+	@ExceptionHandler(UsuarioPerfilNotFoundException.class)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	public ApiErrors usuarioPerfilNotFoundExceptionHandle(UsuarioPerfilNotFoundException ex) {
 		this.mensagemErro = ex.getMessage();
 		return new ApiErrors(mensagemErro);
 	}
