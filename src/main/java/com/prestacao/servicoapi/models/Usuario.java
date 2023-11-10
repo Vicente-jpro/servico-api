@@ -40,4 +40,7 @@ public class Usuario {
 	@OneToMany(mappedBy = "usuario")
 	private List<UsuarioPerfil> usuarioPerfils;
 
+	@OneToMany(mappedBy = "usuario")
+	private List<Cliente> clientes;
+
 }

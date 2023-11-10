@@ -2,6 +2,7 @@ package com.prestacao.servicoapi.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,6 +37,9 @@ public class Endereco {
     @JoinColumn(name = "cidade_id")
     private Cidade cidade;
 
-    @OneToMany(mappedBy = "endereco")
+    @OneToMany(mappedBy = "endereco", cascade = CascadeType.ALL)
     private List<UsuarioPerfil> usuarioPerfils;
+
+    @OneToMany(mappedBy = "endereco", cascade = CascadeType.ALL)
+    private List<Cliente> clientes;
 }
