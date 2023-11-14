@@ -7,6 +7,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import com.prestacao.servicoapi.bulders.CidadeBuilder;
+import com.prestacao.servicoapi.bulders.ClienteBuilder;
 import com.prestacao.servicoapi.dto.CidadeDto;
 import com.prestacao.servicoapi.dto.ClienteDto;
 import com.prestacao.servicoapi.dto.EnderecoDto;
@@ -26,6 +28,7 @@ public class ClienteService {
     private final ClienteRepository clienteRepository;
     private final UsuarioService usuarioService;
     private final EnderecoService enderecoService;
+    private final ClienteBuilder clienteBuilder;
 
     @Transactional
     public ClienteDto salvar(ClienteDto clienteDto) {
@@ -56,10 +59,11 @@ public class ClienteService {
         BeanUtils.copyProperties(usuario, usuarioResponseDto);
 
         Cliente clienteSalvo = clienteRepository.save(cliente);
-        clienteDto.setId(clienteSalvo.getId());
-        clienteDto.setEndereco(enderecodDto);
-        clienteDto.setUsuario(usuarioResponseDto);
-        return clienteDto;
+        // clienteDto.setId(clienteSalvo.getId());
+        // clienteDto.setEndereco(enderecodDto);
+        // clienteDto.setUsuario(usuarioResponseDto);
+
+        return clienteBuilder.toDto(clienteSalvo);
 
     }
 }
