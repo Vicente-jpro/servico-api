@@ -1,6 +1,7 @@
 package com.prestacao.servicoapi.controllers;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +28,7 @@ public class ClienteController {
 
     @PostMapping
     @ApiOperation(value = "Salvar cliente.")
-    @ApiResponse(code = 200, message = "Cliente salvo com sucesso")
+    @ApiResponse(code = 200, message = "Cliente salvo com sucesso.")
     @ResponseStatus(HttpStatus.CREATED)
     public ClienteDto salvar(@RequestBody ClienteDto clienteDto) {
         log.info("Salvar cliente.");
@@ -35,11 +36,20 @@ public class ClienteController {
     }
 
     @GetMapping("/{id}")
-    @ApiOperation(value = "Buscar cliente pelo id")
-    @ApiResponse(code = 200, message = "Cliente encontrado")
+    @ApiOperation(value = "Buscar cliente pelo id.")
+    @ApiResponse(code = 200, message = "Cliente encontrado.")
     @ResponseStatus(HttpStatus.OK)
-    public ClienteDto getClienteById(@PathVariable("id") Long id) {
+    public ClienteDto getClienteById(@PathVariable("id") Long idCliente) {
         log.info("Buscar cliente.");
-        return clienteService.getClienteById(id);
+        return clienteService.getClienteById(idCliente);
+    }
+
+    @DeleteMapping("/{id}")
+    @ApiOperation(value = "Eliminar cliente pelo id.")
+    @ApiResponse(code = 200, message = "Cliente eliminado com sucesso.")
+    @ResponseStatus(HttpStatus.OK)
+    public void eliminar(@PathVariable("id") Long idCliente) {
+        log.info("Eliminar cliente.");
+        clienteService.eliminar(idCliente);
     }
 }

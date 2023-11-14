@@ -74,4 +74,9 @@ public class ClienteService {
 
         return clienteBuilder.toDto(cliente);
     }
+
+    public void eliminar(Long idCliente) {
+        log.info("Eliminando cliente...");
+        clienteRepository.deleteById(idCliente);
+    }
 }
