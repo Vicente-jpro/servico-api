@@ -77,6 +77,7 @@ public class ClienteService {
 
     public void eliminar(Long idCliente) {
         log.info("Eliminando cliente...");
-        clienteRepository.deleteById(idCliente);
+        ClienteDto clienteDto = getClienteById(idCliente);
+        clienteRepository.deleteById(clienteDto.getId());
     }
 }
