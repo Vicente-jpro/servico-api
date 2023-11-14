@@ -15,10 +15,12 @@ import javax.persistence.Table;
 
 import com.prestacao.servicoapi.enums.Genero;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Entity
+@Builder
 @Table(name = "clientes")
 public class Cliente {
 

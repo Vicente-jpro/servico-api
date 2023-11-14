@@ -3,8 +3,6 @@ package com.prestacao.servicoapi.dto;
 import java.time.LocalDateTime;
 
 import com.prestacao.servicoapi.enums.Genero;
-import com.prestacao.servicoapi.models.Endereco;
-import com.prestacao.servicoapi.models.Usuario;
 
 import lombok.Builder;
 import lombok.Data;
@@ -18,7 +16,7 @@ public class ClienteDto {
     private String telemovel1;
     private String telemovel2;
     private Genero genero;
-    private Endereco endereco;
-    private Usuario usuario;
+    private EnderecoDto endereco;
+    private UsuarioResponseDto usuario;
     private LocalDateTime dataCadastro;
 }

@@ -36,7 +36,7 @@ public class UsuarioService implements UserDetailsService {
         return this.usuarioRepository.findAll();
     }
 
-    public Usuario findByUsuarioById(Integer idUsuario) {
+    public Usuario findById(Integer idUsuario) {
         return this.usuarioRepository
                 .findById(idUsuario)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado id invalido: " + idUsuario));
