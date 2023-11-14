@@ -7,20 +7,21 @@ import javax.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import com.prestacao.servicoapi.bulders.CidadeBuilder;
 import com.prestacao.servicoapi.bulders.ClienteBuilder;
 import com.prestacao.servicoapi.dto.CidadeDto;
 import com.prestacao.servicoapi.dto.ClienteDto;
 import com.prestacao.servicoapi.dto.EnderecoDto;
 import com.prestacao.servicoapi.dto.UsuarioResponseDto;
-import com.prestacao.servicoapi.models.Cidade;
+import com.prestacao.servicoapi.exceptions.ClienteNotFoundException;
 import com.prestacao.servicoapi.models.Cliente;
 import com.prestacao.servicoapi.models.Endereco;
 import com.prestacao.servicoapi.models.Usuario;
 import com.prestacao.servicoapi.repositories.ClienteRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ClienteService {
@@ -32,6 +33,7 @@ public class ClienteService {
 
     @Transactional
     public ClienteDto salvar(ClienteDto clienteDto) {
+        log.info("Salvando cliente...");
         clienteDto.setDataCadastro(LocalDateTime.now());
 
         Cliente cliente = new Cliente();
@@ -59,11 +61,17 @@ public class ClienteService {
         BeanUtils.copyProperties(usuario, usuarioResponseDto);
 
         Cliente clienteSalvo = clienteRepository.save(cliente);
-        // clienteDto.setId(clienteSalvo.getId());
-        // clienteDto.setEndereco(enderecodDto);
-        // clienteDto.setUsuario(usuarioResponseDto);
+        log.info("Cliente salvo com sucesso");
 
         return clienteBuilder.toDto(clienteSalvo);
 
+    }
+
+    public ClienteDto getClienteById(Long idCliente) {
+        log.info("Buscando cliente pelo ID: " + idCliente);
+        Cliente cliente = clienteRepository.findById(idCliente)
+                .orElseThrow(() -> new ClienteNotFoundException("Cliente não encontrado ID: " + idCliente));
+
+        return clienteBuilder.toDto(cliente);
     }
 }

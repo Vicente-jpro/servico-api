@@ -13,11 +13,12 @@ public class EnderecoBuilder {
     private final CidadeBuilder cidadeBulder;
 
     public Endereco toModel(EnderecoDto enderecoDto) {
-        return Endereco.builder()
-                .id(enderecoDto.getId())
-                .descricao(enderecoDto.getDescricao())
-                .cidade(cidadeBulder.toModel(enderecoDto.getCidade()))
-                .build();
+        return new Endereco(
+                enderecoDto.getId(),
+                enderecoDto.getDescricao(),
+                cidadeBulder.toModel(enderecoDto.getCidade()),
+                null,
+                null);
 
     }
 

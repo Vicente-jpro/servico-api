@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.prestacao.servicoapi.exceptions.CidadeNotFoundException;
+import com.prestacao.servicoapi.exceptions.ClienteNotFoundException;
 import com.prestacao.servicoapi.exceptions.EnderecoNotFoundException;
 import com.prestacao.servicoapi.exceptions.ProvinciaNotFoundException;
 import com.prestacao.servicoapi.exceptions.UsuarioCadastradoException;
@@ -37,6 +38,14 @@ public class ApplicationControllerAdvice {
 	@ExceptionHandler(UsuarioPerfilNotFoundException.class)
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public ApiErrors usuarioPerfilNotFoundExceptionHandle(UsuarioPerfilNotFoundException ex) {
+		this.mensagemErro = ex.getMessage();
+		return new ApiErrors(mensagemErro);
+	}
+
+	@ResponseBody
+	@ExceptionHandler(ClienteNotFoundException.class)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	public ApiErrors clienteNotFoundExceptionHandle(ClienteNotFoundException ex) {
 		this.mensagemErro = ex.getMessage();
 		return new ApiErrors(mensagemErro);
 	}

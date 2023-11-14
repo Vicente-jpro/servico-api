@@ -25,11 +25,9 @@ public class EnderecoService {
         Long idCidade = enderecoDto.getCidade().getId();
 
         Cidade cidade = cidadeService.getCidadeById(idCidade);
-        Endereco endereco = Endereco
-                .builder()
-                .cidade(cidade)
-                .descricao(enderecoDto.getDescricao())
-                .build();
+        Endereco endereco = new Endereco();
+        endereco.setCidade(cidade);
+        endereco.setDescricao(enderecoDto.getDescricao());
 
         endereco = enderecoRepository.save(endereco);
         log.info("Fim da operação salvar endereço.");
