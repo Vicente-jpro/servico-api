@@ -26,6 +26,7 @@ public class EnderecoService {
 
         Cidade cidade = cidadeService.getCidadeById(idCidade);
         Endereco endereco = new Endereco();
+        endereco.setId(enderecoDto.getId());
         endereco.setCidade(cidade);
         endereco.setDescricao(enderecoDto.getDescricao());
 

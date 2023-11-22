@@ -3,6 +3,7 @@ package com.prestacao.servicoapi.controllers;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -51,5 +52,16 @@ public class ClienteController {
     public void eliminar(@PathVariable("id") Long idCliente) {
         log.info("Eliminar cliente.");
         clienteService.eliminar(idCliente);
+    }
+
+    @PatchMapping("/{id}")
+    @ApiOperation(value = "Atualizar cliente")
+    @ApiResponse(code = 200, message = "Cliente atualizado com sucesso.")
+    @ResponseStatus(HttpStatus.OK)
+    public ClienteDto atualizar(
+            @RequestBody ClienteDto clienteDto,
+            @PathVariable("id") Long idCliente) {
+        log.info("Atualizar cliente.");
+        return clienteService.atualizar(clienteDto, idCliente);
     }
 }

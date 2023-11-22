@@ -47,6 +47,7 @@ public class ClienteService {
 
         EnderecoDto enderecodDto = EnderecoDto
                 .builder()
+                .id(clienteDto.getEndereco().getId())
                 .descricao(clienteDto.getEndereco().getDescricao())
                 .cidade(cidadeDto)
                 .build();
@@ -65,6 +66,17 @@ public class ClienteService {
 
         return clienteBuilder.toDto(clienteSalvo);
 
+    }
+
+    public ClienteDto atualizar(ClienteDto clienteDto, Long idCliente) {
+        log.info("Atualizando o cliente...");
+        ClienteDto cliente = getClienteById(idCliente);
+        if (cliente != null) {
+            clienteDto.setId(cliente.getId());
+            clienteDto.getEndereco().setId(cliente.getEndereco().getId());
+
+        }
+        return salvar(clienteDto);
     }
 
     public ClienteDto getClienteById(Long idCliente) {
