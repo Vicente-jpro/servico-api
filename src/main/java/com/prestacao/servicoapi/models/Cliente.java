@@ -2,6 +2,7 @@ package com.prestacao.servicoapi.models;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -44,7 +45,7 @@ public class Cliente {
     @Enumerated(EnumType.STRING)
     private Genero genero;
 
-    @ManyToOne
+    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 

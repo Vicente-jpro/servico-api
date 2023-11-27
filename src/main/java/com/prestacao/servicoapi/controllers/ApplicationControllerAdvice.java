@@ -16,6 +16,7 @@ import com.prestacao.servicoapi.exceptions.CidadeNotFoundException;
 import com.prestacao.servicoapi.exceptions.ClienteNotFoundException;
 import com.prestacao.servicoapi.exceptions.EnderecoNotFoundException;
 import com.prestacao.servicoapi.exceptions.ProvinciaNotFoundException;
+import com.prestacao.servicoapi.exceptions.TipoServicoFoundException;
 import com.prestacao.servicoapi.exceptions.UsuarioCadastradoException;
 import com.prestacao.servicoapi.exceptions.UsuarioNotFoundException;
 import com.prestacao.servicoapi.exceptions.UsuarioPerfilNotFoundException;
@@ -46,6 +47,14 @@ public class ApplicationControllerAdvice {
 	@ExceptionHandler(ClienteNotFoundException.class)
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public ApiErrors clienteNotFoundExceptionHandle(ClienteNotFoundException ex) {
+		this.mensagemErro = ex.getMessage();
+		return new ApiErrors(mensagemErro);
+	}
+
+	@ResponseBody
+	@ExceptionHandler(TipoServicoFoundException.class)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	public ApiErrors tipoServicoFoundExceptionHandle(TipoServicoFoundException ex) {
 		this.mensagemErro = ex.getMessage();
 		return new ApiErrors(mensagemErro);
 	}

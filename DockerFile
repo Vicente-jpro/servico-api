@@ -1,0 +1,12 @@
+FROM openjdk:8
+WORKDIR /app
+COPY ./target/eurekaserver-0.0.1-SNAPSHOT.jar app.jar 
+EXPOSE 8081 
+ENTRYPOINT java -jar app.jar
+
+# docker build -t docker_hub_profileName/image_name OR docker build -t image_name
+# Exemple: docker build -t vicentesimao/mscloudgateway OR docker build -t mscloudgateway .
+
+# docker run --name mscloudgatewaycontainer -p 8081:8081 vicentesimao/mscloudgateway
+# OR
+# docker run --name mscloudgatewaycontainer -p 8081:8081 mscloudgateway
