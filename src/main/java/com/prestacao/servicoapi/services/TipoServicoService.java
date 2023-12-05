@@ -20,7 +20,8 @@ public class TipoServicoService {
     public TipoServico salvar(TipoServico tipoServico) {
         log.info("Salvando o tipo de serviço");
 
-        if (existeTipoServico(tipoServico)) {
+        boolean servicoExiste = existeTipoServico(tipoServico);
+        if (servicoExiste) {
             log.info("Este tipo de serviço já existe: {}", tipoServico.getNomeServico());
             throw new TipoServicoException("Este tipo de serviço já existe: " + tipoServico.getNomeServico());
         }
