@@ -45,7 +45,7 @@ public class Cliente {
     @Enumerated(EnumType.STRING)
     private Genero genero;
 
-    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
+    @ManyToOne
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
