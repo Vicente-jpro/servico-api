@@ -1,6 +1,7 @@
 package com.prestacao.servicoapi.models;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,8 +13,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.prestacao.servicoapi.enums.Genero;
 
 import lombok.AllArgsConstructor;
@@ -49,11 +52,15 @@ public class Cliente {
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
-    @ManyToOne(cascade = { CascadeType.REMOVE, CascadeType.PERSIST })
+    @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
     @Column(name = "data_cadastro")
     private LocalDateTime dataCadastro;
+
+    @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
+    private List<ServicoPrestado> servicoPrestados;
 
 }

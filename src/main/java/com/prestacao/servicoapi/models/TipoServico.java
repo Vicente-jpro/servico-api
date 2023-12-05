@@ -1,17 +1,20 @@
 package com.prestacao.servicoapi.models;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @Entity
@@ -28,5 +31,9 @@ public class TipoServico {
 
     @Column(name = "preco")
     private BigDecimal preco;
+
+    @OneToMany(mappedBy = "tipoServico", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<ServicoPrestado> servicoPrestados;
 
 }
