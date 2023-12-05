@@ -5,10 +5,7 @@ import org.springframework.stereotype.Component;
 import com.prestacao.servicoapi.dto.TipoServicoDto;
 import com.prestacao.servicoapi.models.TipoServico;
 
-import lombok.RequiredArgsConstructor;
-
 @Component
-@RequiredArgsConstructor
 public class TipoServicoBuilder {
 
     public TipoServico toModel(TipoServicoDto tipoServicoDto) {

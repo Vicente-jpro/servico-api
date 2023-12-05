@@ -1,8 +1,5 @@
 package com.prestacao.servicoapi.bulders;
 
-import javax.persistence.Column;
-import javax.validation.constraints.NotBlank;
-
 import org.springframework.stereotype.Component;
 
 import com.prestacao.servicoapi.dto.UsuarioDto;
