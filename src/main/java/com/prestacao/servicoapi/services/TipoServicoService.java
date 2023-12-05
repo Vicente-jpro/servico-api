@@ -2,6 +2,7 @@ package com.prestacao.servicoapi.services;
 
 import org.springframework.stereotype.Service;
 
+import com.prestacao.servicoapi.exceptions.TipoServicoException;
 import com.prestacao.servicoapi.exceptions.TipoServicoFoundException;
 import com.prestacao.servicoapi.models.TipoServico;
 import com.prestacao.servicoapi.repositories.TipoServicoRepository;
@@ -14,10 +15,15 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class TipoServicoService {
 
-    private TipoServicoRepository tipoServicoRepository;
+    private final TipoServicoRepository tipoServicoRepository;
 
     public TipoServico salvar(TipoServico tipoServico) {
         log.info("Salvando o tipo de serviço");
+
+        if (existeTipoServico(tipoServico)) {
+            log.info("Este tipo de serviço já existe: {}", tipoServico.getNomeServico());
+            throw new TipoServicoException("Este tipo de serviço já existe: " + tipoServico.getNomeServico());
+        }
         return tipoServicoRepository.save(tipoServico);
     }
 
@@ -38,6 +44,13 @@ public class TipoServicoService {
         TipoServico servico = getTipoServico(idTipoServico);
         tipoServico.setId(servico.getId());
         return salvar(tipoServico);
+    }
+
+    private boolean existeTipoServico(TipoServico tipoServico) {
+        boolean existe = tipoServicoRepository.existsByNomeServico(tipoServico.getNomeServico());
+        Long idTipoServico = tipoServico.getId();
+
+        return existe && (idTipoServico == null);
     }
 
 }

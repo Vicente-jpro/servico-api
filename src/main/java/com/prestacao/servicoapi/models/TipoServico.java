@@ -23,10 +23,10 @@ public class TipoServico {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "nome_servico", length = 70)
-    private Long nomeServico;
+    @Column(name = "nome_servico", unique = true, length = 70)
+    private String nomeServico;
 
-    @Column(name = "TOTAL", precision = 20, scale = 2)
+    @Column(name = "preco")
     private BigDecimal preco;
 
 }

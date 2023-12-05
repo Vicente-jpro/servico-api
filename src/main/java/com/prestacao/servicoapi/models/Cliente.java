@@ -45,11 +45,11 @@ public class Cliente {
     @Enumerated(EnumType.STRING)
     private Genero genero;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
-    @ManyToOne
+    @ManyToOne(cascade = { CascadeType.REMOVE, CascadeType.PERSIST })
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 

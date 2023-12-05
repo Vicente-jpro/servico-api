@@ -7,5 +7,6 @@ import com.prestacao.servicoapi.models.TipoServico;
 
 @Repository
 public interface TipoServicoRepository extends JpaRepository<TipoServico, Long> {
+    boolean existsByNomeServico(String nomeServico);
 
 }

@@ -18,7 +18,9 @@ public class ResouceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers("/usuarios/**").permitAll()
                 .antMatchers("/provincias/**").permitAll()
                 .antMatchers("/cidades/**").permitAll()
+                .antMatchers("/tipo-servicos/**").permitAll()
                 .anyRequest().denyAll();
+
     }
 
 }
