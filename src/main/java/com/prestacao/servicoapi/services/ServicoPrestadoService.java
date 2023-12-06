@@ -74,7 +74,7 @@ public class ServicoPrestadoService {
         log.info("Atualizando o Servico Prestado: {}", idServicoPrestado);
         ServicoPrestadoDto servicoPrestado = getServicoPrestadoById(idServicoPrestado);
         servicoPrestadoDto.setId(servicoPrestado.getId());
-
+        servicoPrestadoDto.setDataCadastro(servicoPrestado.getDataCadastro());
         return salvar(servicoPrestadoDto);
     }
 

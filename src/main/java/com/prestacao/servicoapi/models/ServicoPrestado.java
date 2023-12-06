@@ -51,7 +51,7 @@ public class ServicoPrestado {
     @JoinColumn(name = "tipo_servico_id")
     private TipoServico tipoServico;
 
-    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.REMOVE })
+    @ManyToOne(cascade = { CascadeType.MERGE })
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
