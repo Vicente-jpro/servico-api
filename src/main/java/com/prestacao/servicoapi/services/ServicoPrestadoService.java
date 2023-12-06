@@ -30,7 +30,7 @@ public class ServicoPrestadoService {
         TipoServico tipoServico = tipoServicoService.getTipoServicoById(servicoPrestadoDto.getId());
         ClienteDto clienteDto = clienteService.getClienteById(servicoPrestadoDto.getCliente().getId());
         if (clienteDto == null) {
-            log.info("Cliente não existe.");
+            log.warn("Cliente não existe.");
             clienteDto = clienteService.salvar(clienteDto);
         }
         servicoPrestadoDto.setCliente(clienteDto);
