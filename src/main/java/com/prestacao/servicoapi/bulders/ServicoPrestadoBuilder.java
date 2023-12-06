@@ -1,5 +1,9 @@
 package com.prestacao.servicoapi.bulders;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.springframework.stereotype.Component;
 
 import com.prestacao.servicoapi.dto.ServicoPrestadoDto;
@@ -11,30 +15,37 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ServicoPrestadoBuilder {
 
-    private final TipoServicoBuilder tipoServicoBuilder;
-    private final ClienteBuilder clienteBuilder;
+        private final TipoServicoBuilder tipoServicoBuilder;
+        private final ClienteBuilder clienteBuilder;
 
-    public ServicoPrestado toModel(ServicoPrestadoDto servicoPrestadoDto) {
-        return new ServicoPrestado(
-                servicoPrestadoDto.getId(),
-                servicoPrestadoDto.getDataInicio(),
-                servicoPrestadoDto.getDataFim(),
-                servicoPrestadoDto.getDataCadastro(),
-                servicoPrestadoDto.getPagamentoParcela(),
-                tipoServicoBuilder.toModel(servicoPrestadoDto.getTipoServico()),
-                clienteBuilder.toModel(servicoPrestadoDto.getCliente()));
-    }
+        public ServicoPrestado toModel(ServicoPrestadoDto servicoPrestadoDto) {
+                LocalDate dataInicio = LocalDate.parse(servicoPrestadoDto.getDataInicio(),
+                                DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
-    public ServicoPrestadoDto toDto(ServicoPrestado servicoPrestado) {
-        return ServicoPrestadoDto.builder()
-                .id(servicoPrestado.getId())
-                .dataCadastro(servicoPrestado.getDataCadastro())
-                .dataInicio(servicoPrestado.getDataInicio())
-                .dataFim(servicoPrestado.getDataFim())
-                .dataCadastro(servicoPrestado.getDataCadastro())
-                .pagamentoParcela(servicoPrestado.getPagamentoParcela())
-                .tipoServico(tipoServicoBuilder.toDto(servicoPrestado.getTipoServico()))
-                .cliente(clienteBuilder.toDto(servicoPrestado.getCliente()))
-                .build();
-    }
+                LocalDate dataFim = LocalDate.parse(servicoPrestadoDto.getDataFim(),
+                                DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+                return new ServicoPrestado(
+                                servicoPrestadoDto.getId(),
+                                dataInicio,
+                                dataFim,
+                                servicoPrestadoDto.getDataCadastro(),
+                                servicoPrestadoDto.getPagamentoParcela(),
+                                tipoServicoBuilder.toModel(servicoPrestadoDto.getTipoServico()),
+                                clienteBuilder.toModel(servicoPrestadoDto.getCliente()));
+        }
+
+        public ServicoPrestadoDto toDto(ServicoPrestado servicoPrestado) {
+
+                return ServicoPrestadoDto.builder()
+                                .id(servicoPrestado.getId())
+                                .dataCadastro(servicoPrestado.getDataCadastro())
+                                .dataInicio(servicoPrestado.getDataInicio().toString())
+                                .dataFim(servicoPrestado.getDataFim().toString())
+                                .dataCadastro(servicoPrestado.getDataCadastro())
+                                .pagamentoParcela(servicoPrestado.getPagamentoParcela())
+                                .tipoServico(tipoServicoBuilder.toDto(servicoPrestado.getTipoServico()))
+                                .cliente(clienteBuilder.toDto(servicoPrestado.getCliente()))
+                                .build();
+        }
 }

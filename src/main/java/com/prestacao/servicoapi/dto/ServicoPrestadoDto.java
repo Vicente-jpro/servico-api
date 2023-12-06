@@ -11,8 +11,8 @@ import lombok.Data;
 public class ServicoPrestadoDto {
 
     private Long id;
-    private LocalDateTime dataInicio;
-    private LocalDateTime dataFim;
+    private String dataInicio;
+    private String dataFim;
     private LocalDateTime dataCadastro;
     private BigDecimal pagamentoParcela;
     private TipoServicoDto tipoServico;

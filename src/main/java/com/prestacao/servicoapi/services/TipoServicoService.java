@@ -30,8 +30,13 @@ public class TipoServicoService {
 
     public TipoServico getTipoServicoById(Long idTipoServico) {
         log.info("Buscando o tipo de servico pelo ID: " + idTipoServico);
+        if (idTipoServico == null) {
+            log.error("Id do Tipo de Servico não pode ser null:");
+            throw new TipoServicoFoundException("O Tipo de Servico deve escolhido não existe.");
+        }
         return tipoServicoRepository.findById(idTipoServico)
-                .orElseThrow(() -> new TipoServicoFoundException("Tipo de servico não encontrado ID:" + idTipoServico));
+                .orElseThrow(
+                        () -> new TipoServicoFoundException("Tipo de servico não encontrado ID:" + idTipoServico));
     }
 
     public void eliminar(Long idTipoServico) {

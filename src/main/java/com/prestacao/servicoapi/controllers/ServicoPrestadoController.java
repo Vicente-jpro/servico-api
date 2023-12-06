@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/servico-prestado")
+@RequestMapping("/servico-prestados")
 public class ServicoPrestadoController {
 
     private final ServicoPrestadoService servicoPrestadoService;

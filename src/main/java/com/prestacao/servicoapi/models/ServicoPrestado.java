@@ -1,6 +1,7 @@
 package com.prestacao.servicoapi.models;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
@@ -12,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,10 +34,12 @@ public class ServicoPrestado {
     private Long id;
 
     @Column(name = "data_inicio")
-    private LocalDateTime dataInicio;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate dataInicio;
 
     @Column(name = "data_fim")
-    private LocalDateTime dataFim;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate dataFim;
 
     @Column(name = "data_cadastro")
     private LocalDateTime dataCadastro;
@@ -46,7 +51,7 @@ public class ServicoPrestado {
     @JoinColumn(name = "tipo_servico_id")
     private TipoServico tipoServico;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.REMOVE })
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 

@@ -1,5 +1,9 @@
 package com.prestacao.servicoapi.services;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.springframework.stereotype.Service;
 
 import com.prestacao.servicoapi.bulders.ServicoPrestadoBuilder;
@@ -27,15 +31,27 @@ public class ServicoPrestadoService {
 
     public ServicoPrestadoDto salvar(ServicoPrestadoDto servicoPrestadoDto) {
         log.info("Salvando o Servico prestado...");
-        TipoServico tipoServico = tipoServicoService.getTipoServicoById(servicoPrestadoDto.getId());
+        TipoServico tipoServico = tipoServicoService.getTipoServicoById(servicoPrestadoDto.getTipoServico().getId());
         ClienteDto clienteDto = clienteService.getClienteById(servicoPrestadoDto.getCliente().getId());
         if (clienteDto == null) {
             log.warn("Cliente não existe.");
             clienteDto = clienteService.salvar(clienteDto);
+        } else if (servicoPrestadoDto.getId() == null) {
+            servicoPrestadoDto.setDataCadastro(LocalDateTime.now());
         }
+
         servicoPrestadoDto.setCliente(clienteDto);
         servicoPrestadoDto.setTipoServico(tipoServicoBuilder.toDto(tipoServico));
         ServicoPrestado servicoPrestado = servicoPrestadoBuilder.toModel(servicoPrestadoDto);
+
+        LocalDate dataInicio = LocalDate.parse(servicoPrestadoDto.getDataInicio(),
+                DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+        LocalDate dataFim = LocalDate.parse(servicoPrestadoDto.getDataFim(),
+                DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+        servicoPrestado.setDataInicio(dataInicio);
+        servicoPrestado.setDataFim(dataFim);
 
         ServicoPrestado servicoSalvo = servicoPrestadoRepository.save(servicoPrestado);
         log.info("Servico Prestado salvo com sucesso");
