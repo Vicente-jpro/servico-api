@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.prestacao.servicoapi.enums.Genero;
+import com.prestacao.servicoapi.enums.GeneroEnum;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -46,7 +46,7 @@ public class Cliente {
 
     @Column(name = "genero")
     @Enumerated(EnumType.STRING)
-    private Genero genero;
+    private GeneroEnum genero;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id")

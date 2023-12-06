@@ -13,7 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.prestacao.servicoapi.enums.Genero;
+import com.prestacao.servicoapi.enums.GeneroEnum;
 
 import lombok.Data;
 
@@ -35,7 +35,7 @@ public class UsuarioPerfil {
 
     @Column(name = "genero")
     @Enumerated(EnumType.STRING)
-    private Genero genero;
+    private GeneroEnum genero;
 
     @Column(name = "data_cadastro")
     private LocalDateTime dataCadastro;

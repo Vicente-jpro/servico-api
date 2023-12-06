@@ -5,9 +5,6 @@ import java.time.LocalDateTime;
 import org.springframework.stereotype.Component;
 
 import com.prestacao.servicoapi.dto.ClienteDto;
-import com.prestacao.servicoapi.dto.EnderecoDto;
-import com.prestacao.servicoapi.dto.UsuarioResponseDto;
-import com.prestacao.servicoapi.enums.Genero;
 import com.prestacao.servicoapi.models.Cliente;
 
 import lombok.RequiredArgsConstructor;

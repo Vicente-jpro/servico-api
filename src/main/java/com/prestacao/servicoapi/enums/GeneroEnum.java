@@ -1,5 +1,5 @@
 package com.prestacao.servicoapi.enums;
 
-public enum Genero {
+public enum GeneroEnum {
     MASCULINO, FEMININO
 }
