@@ -73,6 +73,6 @@ public class TipoServicoController {
     @ResponseStatus(HttpStatus.OK)
     public TipoServico getServicoById(@PathVariable("id") Long idTipoServico) {
         log.info("Eliminar Tipo de Servico.");
-        return tipoServicoService.getTipoServico(idTipoServico);
+        return tipoServicoService.getTipoServicoById(idTipoServico);
     }
 }

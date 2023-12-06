@@ -28,7 +28,7 @@ public class TipoServicoService {
         return tipoServicoRepository.save(tipoServico);
     }
 
-    public TipoServico getTipoServico(Long idTipoServico) {
+    public TipoServico getTipoServicoById(Long idTipoServico) {
         log.info("Buscando o tipo de servico pelo ID: " + idTipoServico);
         return tipoServicoRepository.findById(idTipoServico)
                 .orElseThrow(() -> new TipoServicoFoundException("Tipo de servico não encontrado ID:" + idTipoServico));
@@ -36,13 +36,13 @@ public class TipoServicoService {
 
     public void eliminar(Long idTipoServico) {
         log.info("Eliminando o tipo de servico pelo ID: " + idTipoServico);
-        TipoServico tipoServico = getTipoServico(idTipoServico);
+        TipoServico tipoServico = getTipoServicoById(idTipoServico);
         tipoServicoRepository.deleteById(tipoServico.getId());
     }
 
     public TipoServico atualizar(TipoServico tipoServico, Long idTipoServico) {
         log.info("Atualizando o tipo de servico pelo ID: " + idTipoServico);
-        TipoServico servico = getTipoServico(idTipoServico);
+        TipoServico servico = getTipoServicoById(idTipoServico);
         tipoServico.setId(servico.getId());
         return salvar(tipoServico);
     }
