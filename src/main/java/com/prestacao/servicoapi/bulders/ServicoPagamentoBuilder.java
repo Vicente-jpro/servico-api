@@ -2,6 +2,7 @@ package com.prestacao.servicoapi.bulders;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Column;
 import javax.persistence.EnumType;
@@ -25,11 +26,13 @@ public class ServicoPagamentoBuilder {
     private final ServicoPrestadoBuilder servicoPrestadoBuilder;
 
     public ServicoPagamento toModel(ServicoPagamentoDto servicoPagamentoDto) {
+
+        LocalDateTime dataPagamento = LocalDateTime.parse(servicoPagamentoDto.getDataPagamento());
         return ServicoPagamento.builder()
                 .id(servicoPagamentoDto.getId())
                 .valorPago(servicoPagamentoDto.getValorPago())
                 .servicoPrestado(servicoPrestadoBuilder.toModel(servicoPagamentoDto.getServicoPrestado()))
-                .dataPagamento(servicoPagamentoDto.getDataPagamento())
+                .dataPagamento(dataPagamento)
                 .build();
     }
 
@@ -39,7 +42,7 @@ public class ServicoPagamentoBuilder {
                 .id(servicoPagamento.getId())
                 .valorPago(servicoPagamento.getValorPago())
                 .servicoPrestado(servicoPrestadoBuilder.toDto(servicoPagamento.getServicoPrestado()))
-                .dataPagamento(servicoPagamento.getDataPagamento())
+                .dataPagamento(servicoPagamento.getDataPagamento().toString())
                 .build();
     }
 }

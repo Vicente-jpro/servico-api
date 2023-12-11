@@ -15,6 +15,6 @@ public class ServicoPagamentoDto {
     private BigDecimal valorPago;
     private FormaPagamentoEnum formaPagamento;
     private ServicoPrestadoDto servicoPrestado;
-    private LocalDateTime dataPagamento;
+    private String dataPagamento;
 
 }
