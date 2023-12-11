@@ -18,11 +18,8 @@ public class ServicoPrestadoBuilder {
         private final ClienteBuilder clienteBuilder;
 
         public ServicoPrestado toModel(ServicoPrestadoDto servicoPrestadoDto) {
-                LocalDate dataInicio = LocalDate.parse(servicoPrestadoDto.getDataInicio(),
-                                DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-
-                LocalDate dataFim = LocalDate.parse(servicoPrestadoDto.getDataFim(),
-                                DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                LocalDate dataInicio = LocalDate.parse(servicoPrestadoDto.getDataInicio());
+                LocalDate dataFim = LocalDate.parse(servicoPrestadoDto.getDataFim());
 
                 return new ServicoPrestado(
                                 servicoPrestadoDto.getId(),
