@@ -3,7 +3,6 @@ package com.prestacao.servicoapi.bulders;
 import org.springframework.stereotype.Component;
 
 import com.prestacao.servicoapi.dto.CidadeDto;
-import com.prestacao.servicoapi.dto.ProvinciaDto;
 import com.prestacao.servicoapi.models.Cidade;
 
 import lombok.RequiredArgsConstructor;

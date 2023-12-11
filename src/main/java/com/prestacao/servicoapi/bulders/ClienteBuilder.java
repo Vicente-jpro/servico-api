@@ -1,7 +1,5 @@
 package com.prestacao.servicoapi.bulders;
 
-import java.time.LocalDateTime;
-
 import org.springframework.stereotype.Component;
 
 import com.prestacao.servicoapi.dto.ClienteDto;
@@ -15,7 +13,6 @@ public class ClienteBuilder {
 
     private final EnderecoBuilder enderecoBuilder;
     private final UsuarioBuilder usuarioBuilder;
-    private LocalDateTime dataCadastro;
 
     public Cliente toModel(ClienteDto clienteDto) {
         return Cliente
