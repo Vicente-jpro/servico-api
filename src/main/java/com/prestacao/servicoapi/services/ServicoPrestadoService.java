@@ -61,10 +61,16 @@ public class ServicoPrestadoService {
 
     public ServicoPrestadoDto getServicoPrestadoById(Long idServicoPrestado) {
         log.info("Buscando o Servico Prestado pelo ID: {}", idServicoPrestado);
+        if (idServicoPrestado == null) {
+            log.error("Servico Prestado não existe ID: {}", idServicoPrestado);
+            throw new ServicoPrestadoNotFoundException("Servico Prestado não exite ID: " + idServicoPrestado);
+        }
+
         ServicoPrestado servicoPrestado = servicoPrestadoRepository
                 .findById(idServicoPrestado)
                 .orElseThrow(
-                        () -> new ServicoPrestadoNotFoundException("Servico Prestado não exite: " + idServicoPrestado));
+                        () -> new ServicoPrestadoNotFoundException(
+                                "Servico Prestado não exite ID: " + idServicoPrestado));
 
         return servicoPrestadoBuilder.toDto(servicoPrestado);
 
