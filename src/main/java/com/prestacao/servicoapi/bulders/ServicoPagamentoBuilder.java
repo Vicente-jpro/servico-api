@@ -18,6 +18,7 @@ public class ServicoPagamentoBuilder {
         return ServicoPagamento.builder()
                 .id(servicoPagamentoDto.getId())
                 .valorPago(servicoPagamentoDto.getValorPago())
+                .formaPagamento(servicoPagamentoDto.getFormaPagamento())
                 .servicoPrestado(servicoPrestadoBuilder.toModel(servicoPagamentoDto.getServicoPrestado()))
                 .dataPagamento(servicoPagamentoDto.getDataPagamento())
                 .build();
@@ -28,6 +29,7 @@ public class ServicoPagamentoBuilder {
         return ServicoPagamentoDto.builder()
                 .id(servicoPagamento.getId())
                 .valorPago(servicoPagamento.getValorPago())
+                .formaPagamento(servicoPagamento.getFormaPagamento())
                 .servicoPrestado(servicoPrestadoBuilder.toDto(servicoPagamento.getServicoPrestado()))
                 .dataPagamento(servicoPagamento.getDataPagamento())
                 .build();
