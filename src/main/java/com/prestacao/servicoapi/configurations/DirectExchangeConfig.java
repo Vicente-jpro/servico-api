@@ -8,7 +8,6 @@ import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.QueueBuilder;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.MessageConverter;
@@ -27,32 +26,21 @@ public class DirectExchangeConfig {
     @Value("${rabbitmq.direct.exchange}")
     private String DIRECT_EXCHANGE;
 
-    @Value("${rabbitmq.queues.direct-dead-letter-queue-1}")
-    private String DIRECT_DEAD_LETTER_QUEUE_1;
-
-    @Value("${rabbitmq.queues.direct-1}")
-    private String DIRECT_QUEUE_1;
+    @Value("${rabbitmq.queues.servico-pagamentos}")
+    private String SERVICO_PAGAMENTOS_QUEUE;
 
     @Value("${rabbitmq.queues.direct-2}")
     private String DIRECT_QUEUE_2;
 
-    @Value("${rabbitmq.direct.routing-key-1}")
-    private String ROUTING_KEY_1;
+    @Value("${rabbitmq.direct.routing-key-servico-pagamentos")
+    private String ROUTING_KEY_SERVICO_PAGAMENTOS;
 
     @Value("${rabbitmq.direct.routing-key-2}")
     private String ROUTING_KEY_2;
 
-    public Queue createDirectDeadLetterQueue1() {
-        return new Queue(DIRECT_DEAD_LETTER_QUEUE_1, true, false, false);
-    }
+    public Queue createServicoPagamentosQueue1() {
 
-    public Queue createDirectQueue1() {
-
-        return QueueBuilder.durable(DIRECT_QUEUE_1)
-                .deadLetterExchange("")// Default exchange
-                .deadLetterRoutingKey(DIRECT_DEAD_LETTER_QUEUE_1)
-                .build();
-        // return new Queue(DIRECT_QUEUE_1, true, false, false);
+        return new Queue(SERVICO_PAGAMENTOS_QUEUE, true, false, false);
     }
 
     public Queue createDirectQueue2() {
@@ -64,9 +52,9 @@ public class DirectExchangeConfig {
     }
 
     public Binding createDirectBinding1() {
-        return BindingBuilder.bind(createDirectQueue1())
+        return BindingBuilder.bind(createServicoPagamentosQueue1())
                 .to(createDirectExchange())
-                .with(ROUTING_KEY_1);
+                .with(ROUTING_KEY_SERVICO_PAGAMENTOS);
     }
 
     public Binding createDirectBinding2() {
@@ -89,9 +77,8 @@ public class DirectExchangeConfig {
     @PostConstruct
     public void init() {
 
-        amqpAdmin.declareQueue(createDirectQueue1());
+        amqpAdmin.declareQueue(createServicoPagamentosQueue1());
         amqpAdmin.declareQueue(createDirectQueue2());
-        amqpAdmin.declareQueue(createDirectDeadLetterQueue1());
         amqpAdmin.declareExchange(createDirectExchange());
         amqpAdmin.declareBinding(createDirectBinding1());
         amqpAdmin.declareBinding(createDirectBinding2());

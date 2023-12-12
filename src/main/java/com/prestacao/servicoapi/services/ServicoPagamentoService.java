@@ -2,8 +2,11 @@ package com.prestacao.servicoapi.services;
 
 import java.time.LocalDateTime;
 
+import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.prestacao.servicoapi.bulders.ServicoPagamentoBuilder;
 import com.prestacao.servicoapi.bulders.ServicoPrestadoBuilder;
 import com.prestacao.servicoapi.dto.ServicoPagamentoDto;
 import com.prestacao.servicoapi.dto.ServicoPrestadoDto;
@@ -20,8 +23,14 @@ import lombok.extern.slf4j.Slf4j;
 public class ServicoPagamentoService {
 
     private final ServicoPagamentoRepository servicoPagamentoRepository;
+    private final ServicoPagamentoBuilder servicoPagamentoBuilder;
     private final ServicoPrestadoService servicoPrestadoService;
     private final ServicoPrestadoBuilder servicoPrestadoBuilder;
+
+    private final AmqpTemplate directExchange;
+
+    @Value("${rabbitmq.direct.routing-key-servico-pagamentos")
+    private String ROUTING_KEY_SERVICO_PAGAMENTOS;
 
     public ServicoPagamentoDto salvar(ServicoPagamentoDto servicoPagamentoDto) {
         log.info("Salvando o Servico Pagamento...");
@@ -41,10 +50,12 @@ public class ServicoPagamentoService {
             servicoPagamento.setDataPagamento(LocalDateTime.now());
         }
 
-        servicoPagamentoRepository.save(servicoPagamento);
+        ServicoPagamento serPagamentoSalvo = servicoPagamentoRepository.save(servicoPagamento);
+        ServicoPagamentoDto servicoPagamentoSalvoDto = servicoPagamentoBuilder.toDto(serPagamentoSalvo);
 
+        directExchange.convertAndSend(ROUTING_KEY_SERVICO_PAGAMENTOS, servicoPagamentoSalvoDto);
         log.info("Salvando o Servico Pagamento salvo com sucesso.");
-        return null;
+        return servicoPagamentoSalvoDto;
     }
 
 }
