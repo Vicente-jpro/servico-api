@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.prestacao.servicoapi.dto.ServicoPagamentoDto;
 import com.prestacao.servicoapi.services.ServicoPagamentoService;
 
@@ -22,8 +23,9 @@ public class ServicoPagamentoController {
     @PostMapping
     @ApiOperation("Salvar Servico Pagamento")
     @ApiResponse(code = 201, message = "Servico Pagamento Salvo com sucesso")
-    public ServicoPagamentoDto salvar(@RequestBody ServicoPagamentoDto servicoPagamentoDto) {
-        return servicoPagamentoService.salvar(servicoPagamentoDto);
+    public void salvar(@RequestBody ServicoPagamentoDto servicoPagamentoDto)
+            throws JsonProcessingException {
+        servicoPagamentoService.salvar(servicoPagamentoDto);
     }
 
 }
