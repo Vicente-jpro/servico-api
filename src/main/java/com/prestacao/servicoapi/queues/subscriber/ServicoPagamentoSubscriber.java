@@ -2,12 +2,9 @@ package com.prestacao.servicoapi.queues.subscriber;
 
 import java.time.LocalDateTime;
 
-import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.prestacao.servicoapi.bulders.ServicoPagamentoBuilder;
 import com.prestacao.servicoapi.bulders.ServicoPrestadoBuilder;
 import com.prestacao.servicoapi.dto.ServicoPagamentoDto;
