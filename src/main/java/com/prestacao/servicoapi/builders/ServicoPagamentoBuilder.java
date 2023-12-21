@@ -1,6 +1,5 @@
 package com.prestacao.servicoapi.builders;
 
-import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.stereotype.Component;
 
 import com.prestacao.servicoapi.dto.ServicoPagamentoDto;
