@@ -36,10 +36,14 @@ public class ServicoPagamento {
     private FormaPagamentoEnum formaPagamento;
 
     @ManyToOne
-    @JoinColumn(name = "servio_prestado")
+    @JoinColumn(name = "servio_prestado_id")
     private ServicoPrestado servicoPrestado;
 
     @Column(name = "data_pagamento")
     private LocalDateTime dataPagamento;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
 }

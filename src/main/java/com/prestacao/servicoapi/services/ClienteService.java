@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import com.prestacao.servicoapi.bulders.ClienteBuilder;
+import com.prestacao.servicoapi.builders.ClienteBuilder;
 import com.prestacao.servicoapi.dto.CidadeDto;
 import com.prestacao.servicoapi.dto.ClienteDto;
 import com.prestacao.servicoapi.dto.EnderecoDto;

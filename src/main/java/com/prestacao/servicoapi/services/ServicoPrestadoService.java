@@ -6,8 +6,8 @@ import java.time.format.DateTimeFormatter;
 
 import org.springframework.stereotype.Service;
 
-import com.prestacao.servicoapi.bulders.ServicoPrestadoBuilder;
-import com.prestacao.servicoapi.bulders.TipoServicoBuilder;
+import com.prestacao.servicoapi.builders.ServicoPrestadoBuilder;
+import com.prestacao.servicoapi.builders.TipoServicoBuilder;
 import com.prestacao.servicoapi.dto.ClienteDto;
 import com.prestacao.servicoapi.dto.ServicoPrestadoDto;
 import com.prestacao.servicoapi.exceptions.ServicoPrestadoNotFoundException;

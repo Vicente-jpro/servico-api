@@ -1,5 +1,6 @@
-package com.prestacao.servicoapi.bulders;
+package com.prestacao.servicoapi.builders;
 
+import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.stereotype.Component;
 
 import com.prestacao.servicoapi.dto.ServicoPagamentoDto;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 public class ServicoPagamentoBuilder {
 
     private final ServicoPrestadoBuilder servicoPrestadoBuilder;
+    private final UsuarioBuilder usuarioBuilder;
 
     public ServicoPagamento toModel(ServicoPagamentoDto servicoPagamentoDto) {
 
@@ -21,6 +23,7 @@ public class ServicoPagamentoBuilder {
                 .formaPagamento(servicoPagamentoDto.getFormaPagamento())
                 .servicoPrestado(servicoPrestadoBuilder.toModel(servicoPagamentoDto.getServicoPrestado()))
                 .dataPagamento(servicoPagamentoDto.getDataPagamento())
+                .usuario(usuarioBuilder.toModel(servicoPagamentoDto.getUsuarioDto()))
                 .build();
     }
 
@@ -32,6 +35,7 @@ public class ServicoPagamentoBuilder {
                 .formaPagamento(servicoPagamento.getFormaPagamento())
                 .servicoPrestado(servicoPrestadoBuilder.toDto(servicoPagamento.getServicoPrestado()))
                 .dataPagamento(servicoPagamento.getDataPagamento())
+                .usuarioDto(usuarioBuilder.toDto(servicoPagamento.getUsuario()))
                 .build();
     }
 }

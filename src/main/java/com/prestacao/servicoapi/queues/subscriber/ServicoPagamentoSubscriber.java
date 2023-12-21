@@ -5,8 +5,9 @@ import java.time.LocalDateTime;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
-import com.prestacao.servicoapi.bulders.ServicoPagamentoBuilder;
-import com.prestacao.servicoapi.bulders.ServicoPrestadoBuilder;
+
+import com.prestacao.servicoapi.builders.ServicoPagamentoBuilder;
+import com.prestacao.servicoapi.builders.ServicoPrestadoBuilder;
 import com.prestacao.servicoapi.dto.ServicoPagamentoDto;
 import com.prestacao.servicoapi.dto.ServicoPrestadoDto;
 import com.prestacao.servicoapi.models.ServicoPagamento;

@@ -1,4 +1,4 @@
-package com.prestacao.servicoapi.bulders;
+package com.prestacao.servicoapi.builders;
 
 import java.time.LocalDate;
 
