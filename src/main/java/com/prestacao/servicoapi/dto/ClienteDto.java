@@ -2,6 +2,7 @@ package com.prestacao.servicoapi.dto;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.prestacao.servicoapi.enums.GeneroEnum;
 
 import lombok.Builder;
